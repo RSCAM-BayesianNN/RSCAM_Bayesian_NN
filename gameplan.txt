@@ -1,0 +1,74 @@
+ABSTRACT :
+    - summary of main results
+
+
+INTRO :
+- motivation
+- talk about bayesian generally and why we want to use over frequentist
+- uncertainty
+- epistemic
+- aleatoric uncertainty
+- why bayesian ? (doctor example)
+- sampling technique mcmc
+- sampling takes long time
+- hence bayesian are more computationally demanding
+*explain in detail* :
+- Talk briefly about frequentist neural nets then contrast with Bayesian neural nets. 
+- Why are Bayesian NN so desirable?
+
+RELATED WORK
+we could talk about some of the other work that we have referenced, and some of the methods specified in them. ( I recommend the paper bayesian deep learning and a Probabilistic Perspective of Generalization that is uploaded in file exchange, which has a good related work section we can base ours on) 
+
+USING BNN FOR PREDICTION
+
+PROTOTYPE BNN:
+- talk about data still
+- talk about marginals
+
+ADDING COMPLEXITY
+- talk about NN with hidden layer
+- include new data set and models.
+
+convergence
+papers
+
+
+
+NUMERICAL INVESTIGATION VIA MONTE CARLO 
+
+
+STUFF BEN SAID FOR ISP
+
+There was evidence of good numerical experimentation. This project is headed in a good direction. However, the concepts and examples presented were too basic.
+On the “Bayesian” slide, the posterior should be P(w|D).  On the “initial model” slide, you should square the terms in the summation.  
+
+THINGS TO KEEP IN MIND
+
+cite original sources where possible, not websites and never wikipedia
+full bibliographic details (including date of access for web references),
+
+Mark Scheme/100
+Depth: 45 marks
+Includes depth of mathematical analysis, depth of numerical investigation and selection
+of experiments (e.g. including higher dimensional cases not just the simplest problems),
+originality, creativity, overall correctness of formulas used, going beyond suggestions from
+tutors, logical argumentation and rigor.
+
+
+Presentation: 35 marks
+Includes structure and layout of report, sectioning, abstract/introduction, motivation,
+continuity and flow, organisation, clarity of argumentation, use of figures, use of
+equations, notational consistency, accuracy of presentation, defining all variables,
+coefficients and other terms.
+
+
+Mechanics: 10 marks
+Punctuation, spelling and grammar, correct use of Latex, correct layout of equations,
+appropriate font sizes in figure captions and axis labels.
+
+
+Bibliography: 10 marks
+Evidence of own reading, richness/breadth of bibliography, evidence of searching for
+original sources, correct citations in text (all entries cited), format of bibliographic entries.
+Note: marking of formatting (e.g. figures, equations, references), spelling, and other
+mechanical issues will be strict and harsh.

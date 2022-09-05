@@ -1,0 +1,41 @@
+**Neural Networks**
+
+Abstract: Neural networks produce exceptional can produce exceptional levels of performance and have revolutionised many areas of industry and academia. However, they are often black boxes and output from networks reveals no information about the certainty of such 
+
+
+
+Artificial neural networks mimic the human brain in that they allow the computer to learn from ‘experience’. Real world data is interpreted in terms of features which are arranged in hierarchies, each feature defined through its relation to simpler characteristics [5]. This process is called deep learning as the hierarchy comprises layers upon layers of features.
+The standard procedure involves feeding a machine learning algorithm a set of training data through the visible layer (input). The NN utilises its hidden layers to extract a variety of features from this raw data, such as pixel density, brightness etc., in the case of image data. Since the correct answers are known for the training data, the NN can improve its perception by tweaking the weights it assigns to each feature in each layer, and finally, in the output. The error in the output is measured by a Loss function, which can take many forms, of which squared error loss is one:
+\begin{equation}
+    L(w) = \min_{w} ∑ (f (x_i; w) − y_i)^2$ .
+\end{equation}
+Optimisation algorithms help minimise this loss by finding minima in the parameter space be employing methods such as Gradient Descent (SGD,ADAM, etc.). The objective is to find global minima so that Generalisation can be achieved, that is, the AI can perform well on new (test) data.
+
+Thus, using these optimal weights we have a trained NN which can be employed for real world tasks, as  driver-less cars or diagnosing Alzheimer's where even human experts fail [@incollection{OZSAHIN2020183]. 
+
+In applications such as these, the margin of error is very low [@book{indrayan2008medical], as the stakes are very high. A traditional neural network will train its parameters and then produce point estimates as the predictions. In other words, the weights that are trained in the network are maximum likelihood estimates (weights that maximise the likelihood of the observations). 
+
+A Bayesain NN , on the other hand, will train it’s network and update parameters, but It doesn’t give us point estimates as predictions, rather it returns a distribution for the outcome and in place of a point estimate, we might use the mean of the distribution. 
+The Bayesian approach is more rigorous in that it conserves the uncertainty inherent in such estimation/optimisation problems. 
+
+Epistemic uncertainty arises due to limited data or knowledge (provided to the model). Increasing training samples should cause epistemic uncertainty to decrease. Any NN model would be vulnerable to Epistemic uncertainty, and a model that seems to fit too well despite this, is probably overfitted and would not generalise well. 
+
+Aleatoric uncertainty stems from stochastic noise present in observations, and other random errors such as errors in measurement etc. 
+
+In cases such as these, where the uncertainty is high, a standard neural network would output a point estimate regardless, however, a Bayesian network would return a confidence interval and also a measure of the uncertainty. This is important in fields like medicine, where the surgeon isn’t concerned solely with the accuracy of the prediction (classification) but also the uncertainty inherent in prediction. 
+
+Another advantage Bayesian NN have over traditional NN is that optimisation algorithms are not always reliable. There is uncertainty involved even in the determination weights. Optimisers move towards a global minimum in the loss landscape, but there is not way for them to know which minimum they are in. In traditional gradient descent, the weights are set wherever the loss is minimised, but this isn’t determined after a full exploration of the loss landscape, rather just settling in the first good minimum found by the optimiser. 
+The Bayesian approach allows us to generate posterior distributions for the weights, using our (informed or otherwise) priors and the likelihood of the observations. Then we can examine this posterior to find other values of the weights that might producer an even lower loss. In general we tend to choose the mode of the posterior (Maximum a Posteriori, MAP estimate). It is frequently find that for a well trained network, at least one of the modes of the posterior will lie on the MLE estimate produced by the optimiser. 
+Now we have a posterior distribution for the weights and MAP estimates instead of MLE. However, we know that it is not advised to really on point estimates and ignore inherent uncertainties when the model needs to be applied in high risk situations. Thus, the next step is to obtain a predictive distribution:
+\begin{equation}
+    p(y|D,x) = \integral{p(y|w,x) p(w|D) dw
+\end{equation}
+
+Where, $\y$ is the new data to be predicted, $w$ are the set of optimised weights and $\D$ is the training data we used to set the weights. We are essentially integrating over the marginal likelihood of the weights. This method is know as Bayesian Model Averaging (BMA), taking the average over all possible model (parameter settings). 
+
+
+Now that we have seen how using a Bayesian approach might be more advantageous, we might also discuss some of its downsides. As we know, instead of providing us with point estimates for the parameters, a Bayesian network has to return entire probability distributions. This means that we require sampling techniques. Instead of using standard Monte Carlo techniques, in the Bayesian context, we choose Markov Chain Monte Carlo simulations. These techniques use conditional densities for the weights instead of treating them all as independent. This reduces the number of samples we need for convergence. In our report, we have made use of the popular Metropolis Hastings algorithm (to be described in detail in a later section). The diagnostic checks for convergence (trace plots, Gelmen-Ruben etc.) paint a very optimistic picture. This, along with the resulting plots showing the overlap between the posterior MAP and the MLE provided by gradient descent shows us that the optimal weights proposed by optimiser can indeed included in the posterior mods and there is no loss of information. 
+
+However, aside from training the neural network, which can be a long and arduous tasks for large datasets with complex feature spaces, we also have to account for the time taken up by simulation. This time will also increase exponentially as the size of the model increases and it will require quite a lot of computing power to perform a task such as this. 
+A simpler approach, more exploarative than conclusive in nature, would be to explore the posteriors of a smaller subset of weights, keeping the rest constant at their optimised levels, and retrain the network using MAP estimates from the posterior.  
+
